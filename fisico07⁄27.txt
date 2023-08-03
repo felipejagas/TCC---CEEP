@@ -41,7 +41,7 @@ CREATE TABLE tb_horarios(
   CONSTRAINT fk2_tb_espaco FOREIGN KEY(idtb_espaco) REFERENCES tb_espacos(cod_espaco)
 );
 CREATE TABLE tb_agendas(
-  cod_agenda INTEGER PRIMARY KEY,
+  cod_agenda INTEGER PRIMARY KEY AUTO_INCREMENT,
   dataa DATE NOT NULL,
   hora INT NOT NULL,
   tipo_pagamento CHAR(2),
