@@ -1,10 +1,10 @@
 CREATE TABLE tb_cidades(
-  cod_cidade INTEGER PRIMARY KEY,
+  cod_cidade INTEGER PRIMARY KEY AUTO_INCREMENT,
   nome_cidade VARCHAR(50) NOT NULL,
   estado_cidade CHAR(2) NOT NULL
 );
 CREATE TABLE tb_clientes(
-  cod_cliente INTEGER PRIMARY KEY,
+  cod_cliente INTEGER PRIMARY KEY AUTO_INCREMENT,
   tipo_cliente CHAR(1) NOT NULL DEFAULT 'C',
   ativo CHAR(1) NOT NULL DEFAULT 'S',
   nome_cliente VARCHAR(250) NOT NULL,
@@ -18,20 +18,20 @@ CREATE TABLE tb_clientes(
   CONSTRAINT ck_tipo_cliente CHECK (tipo_cliente ='C' OR tipo_cliente = 'A')
 );
 CREATE TABLE tb_espacos(
-  cod_espaco INTEGER PRIMARY KEY,
+  cod_espaco INTEGER PRIMARY KEY AUTO_INCREMENT,
   ativo CHAR(1) NOT NULL DEFAULT 'S',
   descricao VARCHAR(50) NOT NULL,
   tipo VARCHAR(50) NOT NULL,
   CONSTRAINT ck_ativo CHECK (ativo = 'S' OR ativo = 'N')
 );
 CREATE TABLE tb_imagens(
-  cod_imagem INTEGER PRIMARY KEY,
+  cod_imagem INTEGER PRIMARY KEY AUTO_INCREMENT,
   idtb_espaco INT NOT NULL,
   imagem VARCHAR(100) NOT NULL,
   CONSTRAINT fk3_tb_espaco FOREIGN KEY(idtb_espaco) REFERENCES tb_espacos(cod_espaco)
  );
 CREATE TABLE tb_horarios(
-  cod_horario INTEGER PRIMARY KEY,
+  cod_horario INTEGER PRIMARY KEY AUTO_INCREMENT,
   entrada_tarde TIME NOT NULL,
   entrada_noite TIME NOT NULL,
   saida_tarde TIME NOT NULL,
