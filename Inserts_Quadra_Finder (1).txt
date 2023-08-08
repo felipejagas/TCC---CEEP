@@ -1,0 +1,65 @@
+INSERT INTO tb_cidades (cod_cidade, nome_cidade, estado_cidade) VALUES
+(1, 'Cascavel', 'PR');
+
+INSERT INTO tb_clientes (cod_cliente,nome_cliente, fone_cliente, senha, cpf_cnpj, email_cliente, idtb_cidade) VALUES
+(1,'Laura',45987654321,'7G9tP2r5',98765432101,'laura@gmail.com',1),
+(2,'Sergio',45789012345,'X6sE1cD8',12345678902,'sergio@gmail.com',1),
+(3,'Robert',45456123789,'3aRtB5qP',56789012303,'robert@gmail.com',1),
+(4,'Rogerio',45678901234,'K2dF9jL4',23456789004,'rogerio@gmail.com',1),
+(5,'Lionel',45999999999,'H7wM0zN1',78901234505,'lionel@gmail.com',1),
+(6,'Cristiano',45876543210,'V4xY8bC3',34567890106,'cristiano@gmail.com',1),
+(7,'Marta',45901234567,'6nTgA1vS',89012345607,'marta@gmail.com',1),
+(8,'Joana',45543219876,'R5mZ2pQ9',45678901208,'joana@gmail.com',1),
+(9,'Erling',45321098765,'B1vC7kF3',01234567809,'erling@gmail.com',1),
+(10,'Carla',45123456789,'L8jH4qD0',67890123410,'carla@gmail.com',1);
+
+
+INSERT INTO tb_horarios (entrada_noite, saida_noite, dia_semana) VALUEs 
+('18:00:00','19:00:00','segunda, terça, quarta, quinta, sexta, sabado, domingo, feriado'),
+('19:00:00','20:00:00','segunda, terça, quarta, quinta, sexta sabado, domingo, feriado'),
+('20:00:00','21:00:00','segunda, terça, quarta, quinta, sexta sabado, domingo, feriado'),
+('21:00:00','22:00:00','segunda, terça, quarta, quinta, sexta sabado, domingo, feriado'),
+('22:00:00','23:00:00','segunda, terça, quarta, quinta, sexta sabado, domingo, feriado'),
+('23:00:00','00:00:00','segunda, terça, quarta, quinta, sexta sabado, domingo, feriado'),
+('00:00:00','01:00:00','segunda, terça, quarta, quinta, sexta sabado, domingo, feriado'),
+('01:00:00','02:00:00','sexta, sabado, feriado');
+INSERT INTO tb_horarios (entrada_tarde, saida_tarde, dia_semana) VALUEs 
+('16:00:00', '17:00:00','sabado, domingo, feriado'),
+('17:00:00', '18:00:00','sabado, domingo, feriado');
+
+INSERT INTO tb_espacos VALUES 
+  (1,'S', 'Quadra society');
+
+INSERT INTO tb_imagens VALUES
+(1, 1, '/img/aluguel.png'),
+(2, 1, '/img/aluguel_2.png'),
+(3, 1, '/img/aluguel_3.png'),
+(4, 1, '/img/aluguel_4.png');
+
+INSERT INTO tb_espacos VALUES 
+  (2,'S','Quadra society');
+
+INSERT INTO tb_imagens VALUES
+(5, 2, '/img/aluguel.png'),
+(6, 2, '/img/aluguel_2.png'),
+(7, 2, '/img/aluguel_3.png'),
+(8, 2, '/img/aluguel_4.png');
+
+INSERT INTO tb_espacos VALUES 
+  (3,'S','Area Lazer');
+INSERT INTO tb_imagens VALUES
+(9, 3, '/img/lazer.jpg');
+
+INSERT INTO tb_espacos VALUES 
+(4,'S','Churrasqueira- lado esquerdo');
+INSERT INTO tb_imagens VALUES
+
+(10, 4, '/img/ambiente_churrasqueira.jpg'),
+(11, 4, '/img/ambiente_churrasqueira_2.jpg');
+INSERT INTO tb_espacos VALUES 
+
+(5,'S','Churrasqueira- lado direito');
+INSERT INTO tb_imagens VALUES
+
+(12, 5, '/img/ambiente_churrasqueira.jpg'),
+(13, 4, '/img/ambiente_churrasqueira_2.jpg');
