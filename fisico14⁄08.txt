@@ -12,7 +12,7 @@ CREATE TABLE tb_clientes(
   senha VARCHAR(50) NOT NULL,
   cpf_cnpj BIGINT NOT NULL,
   email_cliente VARCHAR(100) NOT NULL,
-  idtb_cidade INTEGER NOT NULL,
+  idtb_cidade INTEGER NOT NULL DEFAULT 1,
   CONSTRAINT idtb_cidade FOREIGN KEY(idtb_cidade) REFERENCES tb_cidades(cod_cidade),
   CONSTRAINT ck_ativo CHECK (ativo = 'S' OR ativo = 'N'),
   CONSTRAINT ck_tipo_cliente CHECK (tipo_cliente ='C' OR tipo_cliente = 'A')
