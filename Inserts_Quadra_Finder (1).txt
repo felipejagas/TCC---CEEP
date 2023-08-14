@@ -14,7 +14,7 @@ INSERT INTO tb_clientes (cod_cliente,nome_cliente, fone_cliente, senha, cpf_cnpj
 (10,'Carla',45123456789,'L8jH4qD0',67890123410,'carla@gmail.com',1);
 
 
-INSERT INTO tb_horarios (entrada_noite, saida_noite, dia_semana) VALUEs 
+INSERT INTO tb_horarios (entrada_noite, saida_noite, dia_semana) VALUES 
 ('18:00:00','19:00:00','segunda, terça, quarta, quinta, sexta, sabado, domingo, feriado'),
 ('19:00:00','20:00:00','segunda, terça, quarta, quinta, sexta sabado, domingo, feriado'),
 ('20:00:00','21:00:00','segunda, terça, quarta, quinta, sexta sabado, domingo, feriado'),
