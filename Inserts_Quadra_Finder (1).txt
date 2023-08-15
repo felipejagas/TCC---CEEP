@@ -68,7 +68,7 @@ INSERT INTO tb_horarios (entrada_tarde, saida_tarde, dia_semana) VALUES
 
 
 INSERT INTO tb_espacos VALUES 
-  (1,'S', 'Quadra society');
+  (1,'Quadra society','S', 'Quadra society');
 
 INSERT INTO tb_imagens VALUES
 (1, 1, '/img/aluguel.png'),
@@ -77,7 +77,7 @@ INSERT INTO tb_imagens VALUES
 (4, 1, '/img/aluguel_4.png');
 
 INSERT INTO tb_espacos VALUES 
-  (2,'S','Quadra society');
+  (2,'Quadra society','S','Quadra society');
 
 INSERT INTO tb_imagens VALUES
 (5, 2, '/img/aluguel.png'),
@@ -86,19 +86,19 @@ INSERT INTO tb_imagens VALUES
 (8, 2, '/img/aluguel_4.png');
 
 INSERT INTO tb_espacos VALUES 
-  (3,'S','Area Lazer');
+  (3,'Area Lazer', 'S','Area Lazer');
 INSERT INTO tb_imagens VALUES
 (9, 3, '/img/lazer.jpg');
 
 INSERT INTO tb_espacos VALUES 
-(4,'S','Churrasqueira- lado esquerdo');
+(4,'Churrasqueira','S','Churrasqueira- lado esquerdo');
 INSERT INTO tb_imagens VALUES
 
 (10, 4, '/img/ambiente_churrasqueira.jpg'),
 (11, 4, '/img/ambiente_churrasqueira_2.jpg');
 INSERT INTO tb_espacos VALUES 
 
-(5,'S','Churrasqueira- lado direito');
+(5,'Churrasqueira','S','Churrasqueira- lado direito');
 INSERT INTO tb_imagens VALUES
 
 (12, 5, '/img/ambiente_churrasqueira.jpg'),
