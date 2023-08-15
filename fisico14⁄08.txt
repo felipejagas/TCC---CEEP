@@ -1,7 +1,7 @@
 CREATE TABLE tb_cidades(
   cod_cidade INTEGER PRIMARY KEY AUTO_INCREMENT,
   nome_cidade VARCHAR(50) NOT NULL,
-  estado_cidade CHAR(2) CHECK (estado_cidade = 'PR')
+  estado_cidade NOT NULL CHAR(2) CHECK (estado_cidade = 'PR')
 );
 CREATE TABLE tb_clientes(
   cod_cliente INTEGER PRIMARY KEY AUTO_INCREMENT,
