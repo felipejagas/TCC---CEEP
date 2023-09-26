@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS tb_clientes(
   tipo_cliente CHAR(1) NOT NULL DEFAULT 'C',
   ativo CHAR(1) NOT NULL DEFAULT 'S',
   nome_cliente VARCHAR(250) NOT NULL,
+  data_nasc DATE NOT NULL,
   fone_cliente BIGINT(11) ZEROFILL NOT NULL,
   senha VARCHAR(32) NOT NULL,
   cpf_cnpj BIGINT(11) ZEROFILL NOT NULL,
