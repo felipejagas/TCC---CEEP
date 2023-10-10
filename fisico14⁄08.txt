@@ -1,75 +1,155 @@
--- drop elimina tabelas que vc já tenha criado
--- colocar primeiro as multivaloradas e depois as simples
+-- Dropa as tabelas se já existirem
+
 DROP TABLE IF EXISTS tb_agendas;
+
 DROP TABLE IF EXISTS tb_imagens;
-DROP TABLE IF EXISTS tb_espacos;
+
 DROP TABLE IF EXISTS tb_horarios;
+
 DROP TABLE IF EXISTS tb_clientes;
+
+DROP TABLE IF EXISTS tb_espacos;
+
 DROP TABLE IF EXISTS tb_cidades;
 
 
-CREATE TABLE IF NOT EXISTS tb_cidades(
+
+-- Criação das tabelas
+
+CREATE TABLE IF NOT EXISTS tb_cidades (
+
   cod_cidade INTEGER PRIMARY KEY AUTO_INCREMENT,
+
   nome_cidade VARCHAR(50) NOT NULL,
+
   estado_cidade CHAR(2) CHECK (estado_cidade = 'PR')
-);
-CREATE TABLE IF NOT EXISTS tb_clientes(
-  cod_cliente INTEGER PRIMARY KEY AUTO_INCREMENT,
-  tipo_cliente CHAR(1) NOT NULL DEFAULT 'C',
-  ativo CHAR(1) NOT NULL DEFAULT 'S',
-  nome_cliente VARCHAR(250) NOT NULL,
-  data_nasc DATE NOT NULL,
-  fone_cliente BIGINT(11) ZEROFILL NOT NULL,
-  senha VARCHAR(32) NOT NULL,
-  cpf_cnpj BIGINT(11) ZEROFILL NOT NULL,
-  email_cliente VARCHAR(100) NOT NULL,
-  idtb_cidade INTEGER NOT NULL DEFAULT 1,
-  CONSTRAINT idtb_cidade FOREIGN KEY(idtb_cidade) REFERENCES tb_cidades(cod_cidade)
-  ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT ck_ativo CHECK (ativo = 'S' OR ativo = 'N'),
-  CONSTRAINT ck_tipo_cliente CHECK (tipo_cliente ='C' OR tipo_cliente = 'A')
+
 );
 
-CREATE TABLE IF NOT EXISTS tb_espacos(
-  cod_espaco INTEGER PRIMARY KEY AUTO_INCREMENT,
-  nome_espaco VARCHAR(50) NOT NULL,
+
+
+CREATE TABLE IF NOT EXISTS tb_clientes (
+
+  cod_cliente INTEGER PRIMARY KEY AUTO_INCREMENT,
+
+  tipo_cliente CHAR(1) NOT NULL DEFAULT 'C',
+
   ativo CHAR(1) NOT NULL DEFAULT 'S',
-  descricao VARCHAR(100) NOT NULL,
-  CONSTRAINT ck_ativo CHECK (ativo = 'S' OR ativo = 'N')
-);
-CREATE TABLE IF NOT EXISTS tb_horarios(
-  cod_horario INTEGER PRIMARY KEY AUTO_INCREMENT,
-  entrada_tarde TIME ,
-  entrada_noite TIME,
-  saida_tarde TIME,
-  saida_noite TIME,
-  dia_semana VARCHAR(250),
-  idtb_espaco INTEGER NOT NULL,
-  CONSTRAINT idtb_espacoH FOREIGN KEY(idtb_espacoh) REFERENCES tb_espacos(cod_espaco)
+
+  nome_cliente VARCHAR(250) NOT NULL,
+
+  data_nasc DATE NOT NULL CHECK(data_nasc > '1903-01-01' AND data_nasc < '2007-01-01'),
+
+  fone_cliente BIGINT(11) ZEROFILL NOT NULL,
+
+  senha VARCHAR(32) NOT NULL,
+
+  cpf_cnpj BIGINT(11) ZEROFILL NOT NULL,
+
+  email_cliente VARCHAR(100) NOT NULL,
+
+  idtb_cidade INTEGER NOT NULL DEFAULT 1,
+
+  CONSTRAINT fk_cliente_cidade FOREIGN KEY(idtb_cidade) REFERENCES tb_cidades(cod_cidade)
+
     ON DELETE CASCADE
-    ON UPDATE CASCADE
-);
-CREATE TABLE IF NOT EXISTS tb_imagens(
-  cod_imagem INTEGER PRIMARY KEY AUTO_INCREMENT,
-  idtb_espaco INT NOT NULL,
-  imagem VARCHAR(255) NOT NULL,
-  CONSTRAINT fk3_tb_espaco FOREIGN KEY(idtb_espaco) REFERENCES tb_espacos(cod_espaco)
-  ON DELETE CASCADE
-    ON UPDATE CASCADE
- );
-CREATE TABLE  IF NOT EXISTS tb_agendas(
-  cod_agenda INTEGER PRIMARY KEY AUTO_INCREMENT ,
-  data DATE NOT NULL,
-  hora INT NOT NULL,
-  tipo_pagamento CHAR(2) DEFAULT 'D',
-  idtb_cliente INTEGER NOT NULL,
-  idtb_espaco INTEGER NOT NULL,
-  CONSTRAINT ck_tipo_pagamento CHECK (tipo_pagamento ='D' OR tipo_pagamento = 'P'),
-  CONSTRAINT idtb_cliente FOREIGN KEY(idtb_cliente) REFERENCES tb_clientes(cod_cliente)
-  ON DELETE CASCADE
+
     ON UPDATE CASCADE,
-  CONSTRAINT fk1_tb_espaco FOREIGN KEY(idtb_espaco) REFERENCES tb_espacos(cod_espaco)
-  ON DELETE CASCADE
+
+  CONSTRAINT ck_ativo CHECK (ativo = 'S' OR ativo = 'N'),
+
+  CONSTRAINT ck_tipo_cliente CHECK (tipo_cliente ='C' OR tipo_cliente = 'A')
+
+);
+
+
+
+CREATE TABLE IF NOT EXISTS tb_espacos (
+
+  cod_espaco INTEGER PRIMARY KEY AUTO_INCREMENT,
+
+  nome_espaco VARCHAR(50) NOT NULL,
+
+  ativo CHAR(1) NOT NULL DEFAULT 'S',
+
+  descricao VARCHAR(100) NOT NULL,
+
+  CONSTRAINT ck_espaco_ativo CHECK (ativo = 'S' OR ativo = 'N')
+
+);
+
+
+
+CREATE TABLE IF NOT EXISTS tb_horarios (
+
+  cod_horario INTEGER PRIMARY KEY AUTO_INCREMENT,
+
+  entrada_tarde TIME,
+
+  entrada_noite TIME,
+
+  saida_tarde TIME,
+
+  saida_noite TIME,
+
+  dia_semana VARCHAR(250),
+
+  idtb_espaco INTEGER,
+
+  CONSTRAINT fk_horario_espaco FOREIGN KEY(idtb_espaco) REFERENCES tb_espacos(cod_espaco)
+
+    ON DELETE CASCADE
+
     ON UPDATE CASCADE
+
+);
+
+
+
+CREATE TABLE IF NOT EXISTS tb_imagens (
+
+  cod_imagem INTEGER PRIMARY KEY AUTO_INCREMENT,
+
+  idtb_espaco INT NOT NULL,
+
+  imagem VARCHAR(255) NOT NULL,
+
+  CONSTRAINT fk_imagem_espaco FOREIGN KEY(idtb_espaco) REFERENCES tb_espacos(cod_espaco)
+
+    ON DELETE CASCADE
+
+    ON UPDATE CASCADE
+
+);
+
+
+
+CREATE TABLE IF NOT EXISTS tb_agendas (
+
+  cod_agenda INTEGER PRIMARY KEY AUTO_INCREMENT,
+
+  data DATE NOT NULL,
+
+  hora INT NOT NULL,
+
+  tipo_pagamento CHAR(2) DEFAULT 'D',
+
+  idtb_cliente INTEGER NOT NULL,
+
+  idtb_espaco INTEGER NOT NULL,
+
+  CONSTRAINT fk_agenda_cliente FOREIGN KEY(idtb_cliente) REFERENCES tb_clientes(cod_cliente)
+
+    ON DELETE CASCADE
+
+    ON UPDATE CASCADE,
+
+  CONSTRAINT fk_agenda_espaco FOREIGN KEY(idtb_espaco) REFERENCES tb_espacos(cod_espaco)
+
+    ON DELETE CASCADE
+
+    ON UPDATE CASCADE,
+
+  CONSTRAINT ck_tipo_pagamento CHECK (tipo_pagamento ='D' OR tipo_pagamento = 'P')
+
 );
