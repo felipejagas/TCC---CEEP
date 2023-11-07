@@ -74,6 +74,8 @@ CREATE TABLE IF NOT EXISTS tb_espacos (
 
   ativo CHAR(1) NOT NULL DEFAULT 'S' COMMENT Indica se o espaço está ativo ('S') ou inativo ('N'),
 
+  valor FLOAT (5,2) NOT NULL COMMENT Valor para o espaço,
+
   descricao VARCHAR(100) NOT NULL COMMENT Descrição do espaço, com até 100 caracteres,
 
   CONSTRAINT ck_espaco_ativo CHECK (ativo = 'S' OR ativo = 'N')
@@ -135,6 +137,8 @@ CREATE TABLE IF NOT EXISTS tb_agendas (
   hora INT NOT NULL COMMENT Hora da agenda,
 
   tipo_pagamento CHAR(2) DEFAULT 'D' COMMENT Tipo de pagamento ('D' para dinheiro ou 'P' para pix),
+
+  numero_pix VARCHAR NOT NULL(30)COMMENT 'NUMERO GERADO PARA CONTROLE DO PIX',  
 
   idtb_cliente INTEGER NOT NULL COMMENT Chave estrangeira referenciando a tabela'tb_clientes',
 
