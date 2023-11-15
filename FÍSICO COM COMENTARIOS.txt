@@ -17,40 +17,35 @@ DROP TABLE IF EXISTS tb_cidades;
 -- Criação das tabelas
 
 CREATE TABLE IF NOT EXISTS tb_cidades (
-
-  cod_cidade INTEGER PRIMARY KEY AUTO_INCREMENT COMMENT Número de identificação da cidade (chave primária),
-
-  nome_cidade VARCHAR(50) NOT NULL COMMENT Nome da cidade, com no máximo 50 caracteres,
-
-  estado_cidade CHAR(2) CHECK (estado_cidade = 'PR') COMMENT Abreviação do estado, restrito a 'PR' (Paraná)
-
-
+  cod_cidade INTEGER PRIMARY KEY AUTO_INCREMENT,
+  nome_cidade VARCHAR(50) NOT NULL,
+  estado_cidade CHAR(2) NOT NULL CHECK (estado_cidade IN ('AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RR','RO','RJ','RN','RS','SC','SP','SE','TO'))
 );
+
 
 
 
 CREATE TABLE IF NOT EXISTS tb_clientes (
 
-  cod_cliente INTEGER PRIMARY KEY AUTO_INCREMENT COMMENT Número de identificação do cliente (chave primária),
+  cod_cliente INTEGER PRIMARY KEY AUTO_INCREMENT,
 
-  tipo_cliente CHAR(1) NOT NULL DEFAULT 'C' COMMENT Indica se o cliente é uma pessoa comum ('C') ou um administrador
-('A'),
+  tipo_cliente CHAR(1) NOT NULL DEFAULT 'C',
 
-  ativo CHAR(1) NOT NULL DEFAULT 'S' COMMENT Indica se o cliente está ativo ('S') ou inativo ('N'),
+  ativo CHAR(1) NOT NULL DEFAULT 'S',
 
-  nome_cliente VARCHAR(250) NOT NULL COMMENT Nome do cliente, com até 250 caracteres,
+  nome_cliente VARCHAR(250) NOT NULL,
 
-  data_nasc DATE NOT NULL CHECK(data_nasc > '1903-01-01' AND data_nasc < '2007-01-01') COMMENT Data de nascimento do cliente, restrita a um intervalo específico,
+  data_nasc DATE NOT NULL CHECK(data_nasc > '1903-01-01' AND data_nasc < '2007-01-01'),
 
-  fone_cliente BIGINT(11) ZEROFILL NOT NULL COMMENT Número de telefone do cliente,
+  fone_cliente BIGINT(11) ZEROFILL NOT NULL,
 
-  senha VARCHAR(32) NOT NULL COMMENT Senha do cliente (criptografada, com 32 caracteres),
+  senha VARCHAR(32) NOT NULL,
 
-  cpf_cnpj BIGINT(11) ZEROFILL NOT NULL COMMENT Número de CPF ou CNPJ do cliente,
+  cpf_cnpj BIGINT(11) ZEROFILL NOT NULL,
 
-  email_cliente VARCHAR(100) NOT NULL COMMENT Endereço de e-mail do cliente,
+  email_cliente VARCHAR(100) NOT NULL,
 
-  idtb_cidade INTEGER NOT NULL DEFAULT 1 COMMENT Chave estrangeira referenciando a tabela 'tb_cidades',
+  idtb_cidade INTEGER NOT NULL DEFAULT 1,
 
   CONSTRAINT fk_cliente_cidade FOREIGN KEY(idtb_cidade) REFERENCES tb_cidades(cod_cidade)
 
@@ -68,15 +63,15 @@ CREATE TABLE IF NOT EXISTS tb_clientes (
 
 CREATE TABLE IF NOT EXISTS tb_espacos (
 
-  cod_espaco INTEGER PRIMARY KEY AUTO_INCREMENT COMMENT Número de identificação do espaço (chave primária),
+  cod_espaco INTEGER PRIMARY KEY AUTO_INCREMENT,
 
-  nome_espaco VARCHAR(50) NOT NULL COMMENT Nome do espaço, com no máximo 50 caracteres,
+  nome_espaco VARCHAR(50) NOT NULL,
+  
+  valor float(5,2) NOT NULL,
 
-  ativo CHAR(1) NOT NULL DEFAULT 'S' COMMENT Indica se o espaço está ativo ('S') ou inativo ('N'),
+  ativo CHAR(1) NOT NULL DEFAULT 'S',
 
-  valor FLOAT (5,2) NOT NULL COMMENT Valor para o espaço,
-
-  descricao VARCHAR(100) NOT NULL COMMENT Descrição do espaço, com até 100 caracteres,
+  descricao VARCHAR(100) NOT NULL,
 
   CONSTRAINT ck_espaco_ativo CHECK (ativo = 'S' OR ativo = 'N')
 
@@ -86,19 +81,19 @@ CREATE TABLE IF NOT EXISTS tb_espacos (
 
 CREATE TABLE IF NOT EXISTS tb_horarios (
 
-  cod_horario INTEGER PRIMARY KEY AUTO_INCREMENT COMMENT Número de identificação do horário (chave primária),
+  cod_horario INTEGER PRIMARY KEY AUTO_INCREMENT,
 
-  entrada_tarde TIME COMMENT Horário de entrada na parte da tarde,
+  entrada_tarde TIME,
 
-  entrada_noite TIME COMMENT Horário de entrada na parte da noite,
+  entrada_noite TIME,
 
-  saida_tarde TIME COMMENT Horário de saída na parte da tarde,
+  saida_tarde TIME,
 
-  saida_noite TIME COMMENT Horário de saída na parte da noite,
+  saida_noite TIME,
 
-  dia_semana VARCHAR(250) COMMENT dia que foi reservado o espaço,
+  dia_semana VARCHAR(250),
 
-  idtb_espaco INTEGER COMMENT Chave estrangeira referenciando a tabela 'tb_espacos',
+  idtb_espaco INTEGER,
 
   CONSTRAINT fk_horario_espaco FOREIGN KEY(idtb_espaco) REFERENCES tb_espacos(cod_espaco)
 
@@ -112,11 +107,11 @@ CREATE TABLE IF NOT EXISTS tb_horarios (
 
 CREATE TABLE IF NOT EXISTS tb_imagens (
 
-  cod_imagem INTEGER PRIMARY KEY AUTO_INCREMENT COMMENT Número de identificação da imagem (chave primária),
+  cod_imagem INTEGER PRIMARY KEY AUTO_INCREMENT,
 
-  idtb_espaco INT NOT NULL COMMENT Chave estrangeira referenciando a tabela 'tb_espacos,
+  idtb_espaco INT NOT NULL,
 
-  imagem VARCHAR(255) NOT NULL COMMENT Caminho ou nome do arquivo da imagem, com até 255 caracteres,
+  imagem VARCHAR(255) NOT NULL,
 
   CONSTRAINT fk_imagem_espaco FOREIGN KEY(idtb_espaco) REFERENCES tb_espacos(cod_espaco)
 
@@ -130,19 +125,19 @@ CREATE TABLE IF NOT EXISTS tb_imagens (
 
 CREATE TABLE IF NOT EXISTS tb_agendas (
 
-  cod_agenda INTEGER PRIMARY KEY AUTO_INCREMENT COMMENT Número de identificação da agenda (chave primária),
+  cod_agenda INTEGER PRIMARY KEY AUTO_INCREMENT,
 
-  data DATE NOT NULL COMMENT Data da agenda,
+  data DATE NOT NULL,
 
-  hora INT NOT NULL COMMENT Hora da agenda,
+  hora INT NOT NULL,
 
-  tipo_pagamento CHAR(2) DEFAULT 'D' COMMENT Tipo de pagamento ('D' para dinheiro ou 'P' para pix),
+  tipo_pagamento CHAR(2) DEFAULT 'D',
 
-  numero_pix VARCHAR NOT NULL(30)COMMENT 'NUMERO GERADO PARA CONTROLE DO PIX',  
+  numero_pix VARCHAR(30) NOT NULL,
 
-  idtb_cliente INTEGER NOT NULL COMMENT Chave estrangeira referenciando a tabela'tb_clientes',
+  idtb_cliente INTEGER NOT NULL,
 
-  idtb_espaco INTEGER NOT NULL COMMENT Chave estrangeira referenciando a tabela 'tb_espacos',
+  idtb_espaco INTEGER NOT NULL,
 
   CONSTRAINT fk_agenda_cliente FOREIGN KEY(idtb_cliente) REFERENCES tb_clientes(cod_cliente)
 
@@ -157,3 +152,5 @@ CREATE TABLE IF NOT EXISTS tb_agendas (
     ON UPDATE CASCADE,
 
   CONSTRAINT ck_tipo_pagamento CHECK (tipo_pagamento ='D' OR tipo_pagamento = 'P')
+
+);
